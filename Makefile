@@ -9,11 +9,14 @@ down:
 
 test:
 	@docker build -t test srcs/requirements/mariadb
-	@docker run -it --name delete test
+	@mkdir -p /tmp/test_data
+	@docker run -it --name delete -v /tmp/test_data:/var/lib/mysql test
 
 ctest:
+	@docker stop delete
 	@docker rm delete
 	@docker rmi test
+	@rm -rf /tmp/test_data
 
 status:
 	@docker images

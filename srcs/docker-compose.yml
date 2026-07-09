@@ -15,8 +15,6 @@ services:
     secrets:
       - db_root_password
       - db_password
-    env_file:
-      - .env
     restart: unless-stopped
   
   wordpress:
@@ -33,8 +31,6 @@ services:
       DATABASE_PASSWORD_FILE: ${DATABASE_PASSWORD_FILE}
     secrets:
       - db_password
-    env_file:
-      - .env
     depends_on:
        - mariadb
     restart: unless-stopped
@@ -51,8 +47,6 @@ services:
       - inception-network
     volumes:
       - wp_files:/var/www/html
-    env_file:
-      - .env
     depends_on:
        - wordpress
     restart: unless-stopped
