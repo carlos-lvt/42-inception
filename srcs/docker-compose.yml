@@ -12,6 +12,8 @@ services:
     environment:
       DATABASE_ROOT_PASSWORD_FILE: ${DATABASE_ROOT_PASSWORD_FILE}
       DATABASE_PASSWORD_FILE: ${DATABASE_PASSWORD_FILE}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
     secrets:
       - db_root_password
       - db_password
