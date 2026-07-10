@@ -11,6 +11,4 @@ RUN mkdir -p /var/run/mysqld && chown -R mysql:mysql /var/run/mysqld /var/lib/my
 
 EXPOSE 3306
 
-STOPSIGNAL SIGQUIT
-
 ENTRYPOINT ["/usr/local/bin/setup_mariadb.sh"]
