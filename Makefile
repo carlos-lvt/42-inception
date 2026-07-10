@@ -9,14 +9,19 @@ down:
 
 test:
 	@mkdir -p /home/carlaugu/data/mariadb
-	@docker compose -f srcs/docker-compose.yml up --build mariadb
+	@mkdir -p /home/carlaugu/data/wordpress
+	@docker compose -f srcs/docker-compose.yml up --build wordpress
+
+exec:
+	@docker exec -it wordpress bash
 
 ctest:
-	@docker stop mariadb
-	@docker rm mariadb
+	@docker compose -f srcs/docker-compose.yml down -v wordpress
+	@docker compose -f srcs/docker-compose.yml down -v mariadb
+	@docker rmi wordpress:inception
 	@docker rmi mariadb:inception
-	@docker volume rm srcs_wp_database
 	@sudo rm -rf /home/carlaugu/data/
+	@$(MAKE) status
 
 status:
 	@docker images
