@@ -6,6 +6,7 @@ up:
 	@docker compose -f srcs/docker-compose.yml up --build
 
 down:
+	@docker compose -f srcs/docker-compose.yml down
 
 test:
 	@mkdir -p /home/carlaugu/data/mariadb
@@ -31,9 +32,10 @@ status:
 	@docker volume ls
 
 clean:
+	@docker compose -f srcs/docker-compose.yml down -v --rmi all
 
-fclean:
-	@rm -rf /home/carlaugu/data/mariadb
-	@rm -rf /home/carlaugu/data/wordpress
+fclean: clean
+	@sudo rm -rf /home/carlaugu/data/mariadb
+	@sudo rm -rf /home/carlaugu/data/wordpress
 
 re: fclean up
