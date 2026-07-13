@@ -1,8 +1,11 @@
-.PHONY: up down clean fclean re 
+.PHONY: up down clean fclean re
+
+include srcs/.env
+export
 
 up:
-	@mkdir -p /home/${USER}/data/mariadb
-	@mkdir -p /home/${USER}/data/wordpress
+	@mkdir -p /home/${LOGIN}/data/mariadb
+	@mkdir -p /home/${LOGIN}/data/wordpress
 	@docker compose -f srcs/docker-compose.yml up --build
 
 down:
@@ -13,10 +16,10 @@ clean: down
 
 fclean: clean
 	@docker compose -f srcs/docker-compose.yml down -v
-	@sudo rm -rf /home/${USER}/data/mariadb
-	@echo "Removed /home/${USER}/data/mariadb"
-	@sudo rm -rf /home/${USER}/data/wordpress
-	@echo "Removed /home/${USER}/data/wordpress"
+	@sudo rm -rf /home/${LOGIN}/data/mariadb
+	@echo "Removed /home/${LOGIN}/data/mariadb"
+	@sudo rm -rf /home/${LOGIN}/data/wordpress
+	@echo "Removed /home/${LOGIN}/data/wordpress"
 
 re: fclean up
 
