@@ -1,8 +1,8 @@
 .PHONY: up down clean fclean re 
 
 up:
-	@mkdir -p /home/carlaugu/data/mariadb
-	@mkdir -p /home/carlaugu/data/wordpress
+	@mkdir -p /home/${USER}/data/mariadb
+	@mkdir -p /home/${USER}/data/wordpress
 	@docker compose -f srcs/docker-compose.yml up --build
 
 down:
@@ -13,12 +13,13 @@ clean: down
 
 fclean: clean
 	@docker compose -f srcs/docker-compose.yml down -v
-	@sudo rm -rf /home/carlaugu/data/mariadb
-	@echo "Removed /home/carlaugu/data/mariadb"
-	@sudo rm -rf /home/carlaugu/data/wordpress
-	@echo "Removed /home/carlaugu/data/wordpress"
+	@sudo rm -rf /home/${USER}/data/mariadb
+	@echo "Removed /home/${USER}/data/mariadb"
+	@sudo rm -rf /home/${USER}/data/wordpress
+	@echo "Removed /home/${USER}/data/wordpress"
 
 re: fclean up
+
 
 status:
 	@docker images
