@@ -8,22 +8,6 @@ up:
 down:
 	@docker compose -f srcs/docker-compose.yml down
 
-test:
-	@mkdir -p /home/carlaugu/data/mariadb
-	@mkdir -p /home/carlaugu/data/wordpress
-	@docker compose -f srcs/docker-compose.yml up --build wordpress
-
-exec:
-	@docker exec -it wordpress bash
-
-ctest:
-	@docker compose -f srcs/docker-compose.yml down -v wordpress
-	@docker compose -f srcs/docker-compose.yml down -v mariadb
-	@docker rmi wordpress:inception
-	@docker rmi mariadb:inception
-	@sudo rm -rf /home/carlaugu/data/
-	@$(MAKE) status
-
 status:
 	@docker images
 	@echo ""	
