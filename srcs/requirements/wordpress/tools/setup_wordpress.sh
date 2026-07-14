@@ -6,10 +6,11 @@ DB_USER_PASSWORD=$(cat ${DATABASE_PASSWORD_FILE})
 WP_USER_PASSWORD=$(cat ${WP_USER_PASSWORD_FILE})
 WP_ADMIN_PASSWORD=$(cat ${WP_ADMIN_PASSWORD_FILE})
 
-# Wait until mariadb is ready to accept connections.
+# Wait until mariadb is ready to accept connections *with the
+# wordpress DB credentials*, not just until the port is open.
 # docker-compose's depends_on only guarantees the mariadb
-# container has started, not that mysqld is already listening.
-until (echo > /dev/tcp/mariadb/3306) 2>/dev/null; do
+# container has started, not that the DB/user already exist.
+until mysqladmin ping -h "${DATABASE_HOST}" -u "${DATABASE_USER}" -p"${DB_USER_PASSWORD}" --silent 2>/dev/null; do
 	sleep 1
 done
 

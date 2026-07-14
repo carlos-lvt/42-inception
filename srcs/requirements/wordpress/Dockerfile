@@ -12,9 +12,10 @@ FROM debian:bookworm
 	# php8.2-xml: lets PHP read XML files
 	# php8.2-zip: lets PHP open/create zip files (plugins, themes)
 	# wget: tool to download files
+	# mariadb-client: provides mysqladmin, used to check the DB is ready
 	# wp-cli: command-line tool to manage WordPress (install, config, users)
 RUN apt-get update && apt-get install -y \
-	php8.2-fpm \	
+	php8.2-fpm \
 	php8.2-cli \
 	php8.2-mysql \
 	php8.2-curl \
@@ -26,6 +27,7 @@ RUN apt-get update && apt-get install -y \
 	php8.2-zip \
 	wget \
 	curl \
+	mariadb-client \
 	&& ln -s /usr/sbin/php-fpm8.2 /usr/local/bin/php-fpm \
 	&& curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
 	&& chmod +x wp-cli.phar \
